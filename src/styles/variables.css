@@ -1,0 +1,29 @@
+:root {
+  /* Палитра */
+  --color-text: #454046;
+  --color-bg: #fdf5ee;
+  --color-bg-alt: #f2f2f2;
+  --color-bg-soft: #fafafa;
+  --color-accent: #cebdb2;
+  --color-accent-hover: #e4b993;
+  --color-dark: #000000;
+  --color-white: #ffffff;
+  --color-vk: #0077ff;
+
+  /* Скругления */
+  --radius-btn: 30px;
+  --radius-card: 8px;
+  --radius-rect: 1px;
+
+  /* Тени */
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 12px rgba(69, 64, 70, 0.08);
+
+  /* Отступы */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 60px;
+  --space-2xl: 80px;
+}
