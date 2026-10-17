@@ -11,6 +11,26 @@ import Dictionary from './components/Dictionary.jsx'
 import Pricing from './components/Pricing.jsx'
 import Contacts from './components/Contacts.jsx'
 
+// Переходы по якорям (#contacts, #pricing...) одинаково на ПК и на тач-устройствах
+function useAnchorScroll() {
+  useEffect(() => {
+    const onClick = (e) => {
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+      const link = e.target.closest?.('a[href^="#"]')
+      const hash = link?.getAttribute('href')
+      if (!hash || hash.length < 2) return
+      const target = document.getElementById(hash.slice(1))
+      if (!target) return
+      e.preventDefault()
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+      history.pushState(null, '', hash)
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [])
+}
+
 // Лёгкое появление секций при скролле (Hero виден сразу и не анимируется)
 function useRevealOnScroll() {
   useEffect(() => {
@@ -45,6 +65,7 @@ function useRevealOnScroll() {
 
 export default function App() {
   useRevealOnScroll()
+  useAnchorScroll()
 
   return (
     <main>

@@ -9,7 +9,7 @@ const stroke = {
 const PHONE = { label: '+7 915 198 2782', href: 'tel:+79151982782' }
 const EMAIL = { label: 'dolinrose@mail.ru', href: 'mailto:dolinrose@mail.ru' }
 
-// TODO: добавить ссылку на сообщество
+// TODO: добавить ссылку на сообщество (после этого заглушка отключится сама)
 const GROUP = { label: 'Блог о конном мире', href: '#' }
 
 const SOCIALS = [
@@ -44,21 +44,15 @@ const SOCIALS = [
       </text>
     ),
   },
-  {
-    name: 'Написать на почту',
-    title: EMAIL.label,
-    href: EMAIL.href,
-    external: false,
-    icon: (
-      <>
-        <rect x="3.5" y="5.5" width="17" height="13" rx="2" {...stroke} />
-        <path d="m4 7 8 6 8-6" {...stroke} />
-      </>
-    ),
-  },
 ]
 
 const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
+
+// Пока ссылки нет (href="#"), клик ничего не делает: ни прыжка вверх, ни новой вкладки
+const isPlaceholder = GROUP.href === '#'
+const groupProps = isPlaceholder
+  ? { onClick: (e) => e.preventDefault() }
+  : externalProps
 
 export default function Contacts() {
   return (
@@ -91,7 +85,7 @@ export default function Contacts() {
         </ul>
 
         <div className="contacts__group">
-          <a className="btn btn-outline" href={GROUP.href} {...externalProps}>
+          <a className="btn btn-outline" href={GROUP.href} {...groupProps}>
             {GROUP.label}
           </a>
         </div>

@@ -95,9 +95,11 @@ h3 {
   border-radius: var(--radius-btn);
 }
 
-.btn-primary:hover {
-  background: var(--color-bg);
-  color: var(--color-text);
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
 }
 
 .btn-outline {
@@ -108,9 +110,11 @@ h3 {
   border-radius: var(--radius-rect);
 }
 
-.btn-outline:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
+@media (hover: hover) {
+  .btn-outline:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
 }
 
 @media (max-width: 768px) {

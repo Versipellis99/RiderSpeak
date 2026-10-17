@@ -10,7 +10,7 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <section className="section section--alt" id="pricing">
+    <section className="section section--dark" id="pricing">
       <div className="container">
         <h2>Цены</h2>
         <div className="pricing__grid">

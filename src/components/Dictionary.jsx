@@ -18,8 +18,10 @@ export default function Dictionary() {
             ))}
           </ul>
         </div>
-        {/* TODO: положить файл в public/ и указать путь, например href="/dictionary.pdf" */}
-        <a className="btn btn-primary" href="#">Скачать PDF</a>
+        {/* TODO: положить файл в public/, указать путь (href="/dictionary.pdf") и убрать onClick */}
+        <a className="btn btn-primary" href="#" onClick={(e) => e.preventDefault()}>
+          Скачать PDF
+        </a>
       </div>
     </section>
   )

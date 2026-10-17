@@ -13,6 +13,7 @@ export default function Hero() {
             Помогу понять иностранных тренеров, читать FEI-правила, общаться на
             зарубежных турнирах и работать с импортными лошадьми
           </p>
+          <p className="hero__tagline">Редкая специализация: английский для конников</p>
           <div className="hero__actions">
             <a className="btn btn-hero" href="#contacts">Записаться на пробный урок</a>
             <a className="btn btn-hero-outline" href="#pricing">Узнать стоимость</a>

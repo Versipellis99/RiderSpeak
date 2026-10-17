@@ -4,11 +4,19 @@
   --color-bg: #fdf5ee;
   --color-bg-alt: #f2f2f2;
   --color-bg-soft: #fafafa;
-  --color-accent: #cebdb2;
-  --color-accent-hover: #e4b993;
+  --color-accent: #f0c9a8;
+  --color-accent-hover: #e8b58c;
+  --color-accent-soft: #fbe9d8;
   --color-dark: #000000;
   --color-white: #ffffff;
   --color-vk: #0077ff;
+
+  /* Тёмные секции (на чёрном фоне) */
+  --color-dark-bg: var(--color-dark);
+  --color-on-dark: var(--color-bg);
+  --color-on-dark-muted: rgba(253, 245, 238, 0.65);
+  --color-on-dark-line: rgba(253, 245, 238, 0.15);
+  --color-on-dark-card: rgba(255, 255, 255, 0.04);
 
   /* Скругления */
   --radius-btn: 30px;

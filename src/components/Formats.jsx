@@ -12,10 +12,6 @@ const FORMATS = [
     text: 'Регистрация, FEI-правила, общение с судьями и организаторами.',
   },
   {
-    title: 'Сопровождение сделки с лошадью',
-    text: 'Переписка и переговоры с заводчиком, разбор вет-протоколов и документов.',
-  },
-  {
     title: 'Разговорный клуб',
     text: 'Групповая практика в неформальной обстановке, разбор реальных ситуаций.',
   },
@@ -27,7 +23,7 @@ const FORMATS = [
 
 export default function Formats() {
   return (
-    <section className="section" id="formats">
+    <section className="section section--dark" id="formats">
       <div className="container">
         <h2>Услуги</h2>
         <div className="formats__grid">
