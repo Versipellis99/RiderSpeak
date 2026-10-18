@@ -36,10 +36,10 @@ const VIDEOS = [video1, video2, video3, video4, video5]
 
 // width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала»
 const SCREENSHOTS = [
-  { src: photo1, width: 720, height: 1280 },
+  { src: photo1, width: 1080, height: 1920 },
   { src: photo2, width: 1080, height: 1920 },
   { src: photo3, width: 1080, height: 1920 },
-  { src: photo4, width: 1080, height: 1920 },
+  { src: photo4, width: 720, height: 1280 },
 ]
 
 function VideoCarousel() {
