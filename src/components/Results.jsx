@@ -1,5 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { placeholder } from '../assets/placeholder.js'
+import photo1 from '../assets/reviews/ФотоОтзыв1.webp'
+import photo2 from '../assets/reviews/ФотоОтзыв2.webp'
+import photo3 from '../assets/reviews/ФотоОтзыв3.webp'
+import photo4 from '../assets/reviews/ФотоОтзыв4.webp'
+import photo5 from '../assets/reviews/ФотоОтзыв5.webp'
+import video1 from '../assets/reviews/ВидеоОтзыв1.mp4'
+import video2 from '../assets/reviews/ВидеоОтзыв2.mp4'
+import video3 from '../assets/reviews/ВидеоОтзыв3.mp4'
+import video4 from '../assets/reviews/ВидеоОтзыв4.mp4'
+import video5 from '../assets/reviews/ВидеоОтзыв5.mp4'
 
 // TODO: заменить на реальные цифры
 const STATS = [
@@ -23,13 +32,25 @@ const CASES = [
   { name: 'Имя, дисциплина', role: '', text: 'Текст кейса: задача, срок, результат.' },
 ]
 
-// TODO: заменить на реальные видео-отзывы (вертикальные 9:16) и скриншоты переписок (вертикальные, разной высоты)
-const VIDEOS = Array.from({ length: 6 }, () => placeholder(9, 16))
-const SCREENSHOTS = [placeholder(9, 16), placeholder(3, 4), placeholder(9, 14)]
+const VIDEOS = [video1, video2, video3, video4, video5]
+
+// width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала»
+const SCREENSHOTS = [
+  { src: photo1, width: 720, height: 1280 },
+  { src: photo2, width: 1080, height: 1920 },
+  { src: photo3, width: 1080, height: 1920 },
+  { src: photo4, width: 1080, height: 1920 },
+  { src: photo5, width: 1080, height: 1920 },
+]
 
 function VideoCarousel() {
+  const rootRef = useRef(null)
   const trackRef = useRef(null)
+  const videoRefs = useRef([])
+  const [near, setNear] = useState(false)
   const [edge, setEdge] = useState({ start: true, end: false })
+  const [playing, setPlaying] = useState(null)
+  const [started, setStarted] = useState([])
 
   const update = useCallback(() => {
     const el = trackRef.current
@@ -40,11 +61,46 @@ function VideoCarousel() {
     })
   }, [])
 
+  // Адреса видео подставляем, только когда карусель подходит к экрану: до этого ничего не грузится
+  useEffect(() => {
+    const el = rootRef.current
+    if (!el || !('IntersectionObserver' in window)) {
+      setNear(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '400px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   useEffect(() => {
     update()
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [update])
+
+  // Одновременно играет только одно видео
+  const handlePlay = (i) => {
+    videoRefs.current.forEach((v, j) => {
+      if (v && j !== i) v.pause()
+    })
+    setPlaying(i)
+  }
+
+  const handlePause = (i) => setPlaying((cur) => (cur === i ? null : cur))
+
+  const startVideo = (i) => {
+    setStarted((s) => (s.includes(i) ? s : [...s, i]))
+    videoRefs.current[i]?.play()
+  }
 
   const scrollByCard = (dir) => {
     const el = trackRef.current
@@ -55,6 +111,7 @@ function VideoCarousel() {
 
   return (
     <div
+      ref={rootRef}
       className="results__carousel"
       role="group"
       aria-roledescription="карусель"
@@ -103,13 +160,36 @@ function VideoCarousel() {
       </div>
       <div className="results__videos" ref={trackRef} onScroll={update} tabIndex={0}>
         {VIDEOS.map((src, i) => (
-          <div className="results__video" key={i}>
-            {/* TODO: заменить на видео */}
-            <img className="ph" src={src} alt="Фото: превью видео-отзыва ученика — заменить" />
-            <svg className="results__play" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
-              <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M20 16.5v15l12-7.5z" fill="currentColor" />
-            </svg>
+          <div className="results__video" key={src}>
+            {/* preload="metadata": грузятся только метаданные и первый кадр (он служит постером).
+                #t=0.001 нужен iOS Safari, чтобы показать первый кадр. */}
+            <video
+              ref={(el) => {
+                videoRefs.current[i] = el
+              }}
+              className="ph results__media"
+              src={near ? `${src}#t=0.001` : undefined}
+              preload="metadata"
+              playsInline
+              controls={started.includes(i)}
+              aria-label={`Видео-отзыв ${i + 1}`}
+              onPlay={() => handlePlay(i)}
+              onPause={() => handlePause(i)}
+              onEnded={() => handlePause(i)}
+            />
+            {playing !== i && (
+              <button
+                type="button"
+                className="results__play"
+                aria-label={`Воспроизвести видео-отзыв ${i + 1}`}
+                onClick={() => startVideo(i)}
+              >
+                <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+                  <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M20 16.5v15l12-7.5z" fill="currentColor" />
+                </svg>
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -148,9 +228,17 @@ export default function Results() {
 
         <h3 className="results__subtitle">Переписки</h3>
         <div className="results__shots">
-          {SCREENSHOTS.map((src, i) => (
-            // TODO: заменить на скриншот
-            <img key={i} className="ph" src={src} alt="Фото: скриншот переписки с учеником — заменить" />
+          {SCREENSHOTS.map((s, i) => (
+            <img
+              key={s.src}
+              className="ph"
+              src={s.src}
+              width={s.width}
+              height={s.height}
+              loading="lazy"
+              decoding="async"
+              alt={`Скриншот отзыва ${i + 1}`}
+            />
           ))}
         </div>
       </div>
