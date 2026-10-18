@@ -1,4 +1,4 @@
-import heroPhoto from '../assets/media/hero-photo.webp'
+import heroPhoto from '../assets/media/hero-photo2.webp'
 
 export default function Hero() {
   return (
@@ -20,10 +20,10 @@ export default function Hero() {
         <img
           className="ph hero__photo"
           src={heroPhoto}
-          width={2316}
-          height={3088}
+          width={2160}
+          height={3840}
           fetchPriority="high"
-          alt="Дарья Борисова, преподаватель английского для конников"
+          alt="Дарья Борисова с лошадью в поле"
         />
       </div>
     </section>
