@@ -3,7 +3,6 @@ import photo1 from '../assets/reviews/ФотоОтзыв1.webp'
 import photo2 from '../assets/reviews/ФотоОтзыв2.webp'
 import photo3 from '../assets/reviews/ФотоОтзыв3.webp'
 import photo4 from '../assets/reviews/ФотоОтзыв4.webp'
-import photo5 from '../assets/reviews/ФотоОтзыв5.webp'
 import video1 from '../assets/reviews/ВидеоОтзыв1.mp4'
 import video2 from '../assets/reviews/ВидеоОтзыв2.mp4'
 import video3 from '../assets/reviews/ВидеоОтзыв3.mp4'
@@ -40,7 +39,6 @@ const SCREENSHOTS = [
   { src: photo2, width: 1080, height: 1920 },
   { src: photo3, width: 1080, height: 1920 },
   { src: photo4, width: 1080, height: 1920 },
-  { src: photo5, width: 1080, height: 1920 },
 ]
 
 function VideoCarousel() {
