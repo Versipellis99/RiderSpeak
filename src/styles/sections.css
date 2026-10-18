@@ -613,7 +613,7 @@
   }
 }
 
-.results__videos {
+.results__track {
   display: flex;
   gap: var(--space-md);
   overflow-x: auto;
@@ -622,11 +622,11 @@
   scrollbar-width: none;
 }
 
-.results__videos::-webkit-scrollbar {
+.results__track::-webkit-scrollbar {
   display: none;
 }
 
-.results__video {
+.results__slide {
   position: relative;
   flex: 0 0 calc((100% - 2 * var(--space-md)) / 3);
   scroll-snap-align: start;
@@ -656,22 +656,15 @@
 }
 
 @media (max-width: 900px) {
-  .results__video {
+  .results__slide {
     flex-basis: calc((100% - var(--space-md)) / 2);
   }
 }
 
 @media (max-width: 768px) {
-  .results__video {
+  .results__slide {
     flex-basis: 82%;
   }
-}
-
-.results__shots {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
-  align-items: start;
 }
 
 /* Словарь */
@@ -820,11 +813,6 @@
 
   .results__cases {
     grid-auto-rows: auto;
-  }
-
-  .results__shots {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
   }
 
   .dictionary__inner {

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Carousel from './Carousel.jsx'
 import photo1 from '../assets/reviews/ФотоОтзыв1.webp'
 import photo2 from '../assets/reviews/ФотоОтзыв2.webp'
 import photo3 from '../assets/reviews/ФотоОтзыв3.webp'
@@ -43,21 +44,10 @@ const SCREENSHOTS = [
 
 function VideoCarousel() {
   const rootRef = useRef(null)
-  const trackRef = useRef(null)
   const videoRefs = useRef([])
   const [near, setNear] = useState(false)
-  const [edge, setEdge] = useState({ start: true, end: false })
   const [playing, setPlaying] = useState(null)
   const [started, setStarted] = useState([])
-
-  const update = useCallback(() => {
-    const el = trackRef.current
-    if (!el) return
-    setEdge({
-      start: el.scrollLeft <= 2,
-      end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2,
-    })
-  }, [])
 
   // Адреса видео подставляем, только когда карусель подходит к экрану: до этого ничего не грузится
   useEffect(() => {
@@ -79,12 +69,6 @@ function VideoCarousel() {
     return () => io.disconnect()
   }, [])
 
-  useEffect(() => {
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [update])
-
   // Одновременно играет только одно видео
   const handlePlay = (i) => {
     videoRefs.current.forEach((v, j) => {
@@ -100,98 +84,62 @@ function VideoCarousel() {
     videoRefs.current[i]?.play()
   }
 
-  const scrollByCard = (dir) => {
-    const el = trackRef.current
-    const card = el.firstElementChild
-    const gap = parseFloat(getComputedStyle(el).columnGap) || 0
-    el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
-  }
-
   return (
-    <div
-      ref={rootRef}
-      className="results__carousel"
-      role="group"
-      aria-roledescription="карусель"
-      aria-label="Видео-отзывы"
-    >
-      <div className="results__carousel-head">
-        <h3 className="results__subtitle">Видео-отзывы</h3>
-        <div className="results__arrows">
-          <button
-            type="button"
-            className="results__arrow"
-            aria-label="Назад"
-            disabled={edge.start}
-            onClick={() => scrollByCard(-1)}
-          >
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path
-                d="m15 5-7 7 7 7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="results__arrow"
-            aria-label="Вперёд"
-            disabled={edge.end}
-            onClick={() => scrollByCard(1)}
-          >
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path
-                d="m9 5 7 7-7 7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+    <Carousel title="Видео-отзывы" label="Видео-отзывы" rootRef={rootRef}>
+      {VIDEOS.map((src, i) => (
+        <div className="results__slide" key={src}>
+          {/* preload="metadata": грузятся только метаданные и первый кадр (он служит постером).
+              #t=0.001 нужен iOS Safari, чтобы показать первый кадр. */}
+          <video
+            ref={(el) => {
+              videoRefs.current[i] = el
+            }}
+            className="ph results__media"
+            src={near ? `${src}#t=0.001` : undefined}
+            preload="metadata"
+            playsInline
+            controls={started.includes(i)}
+            aria-label={`Видео-отзыв ${i + 1}`}
+            onPlay={() => handlePlay(i)}
+            onPause={() => handlePause(i)}
+            onEnded={() => handlePause(i)}
+          />
+          {playing !== i && (
+            <button
+              type="button"
+              className="results__play"
+              aria-label={`Воспроизвести видео-отзыв ${i + 1}`}
+              onClick={() => startVideo(i)}
+            >
+              <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
+                <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M20 16.5v15l12-7.5z" fill="currentColor" />
+              </svg>
+            </button>
+          )}
         </div>
-      </div>
-      <div className="results__videos" ref={trackRef} onScroll={update} tabIndex={0}>
-        {VIDEOS.map((src, i) => (
-          <div className="results__video" key={src}>
-            {/* preload="metadata": грузятся только метаданные и первый кадр (он служит постером).
-                #t=0.001 нужен iOS Safari, чтобы показать первый кадр. */}
-            <video
-              ref={(el) => {
-                videoRefs.current[i] = el
-              }}
-              className="ph results__media"
-              src={near ? `${src}#t=0.001` : undefined}
-              preload="metadata"
-              playsInline
-              controls={started.includes(i)}
-              aria-label={`Видео-отзыв ${i + 1}`}
-              onPlay={() => handlePlay(i)}
-              onPause={() => handlePause(i)}
-              onEnded={() => handlePause(i)}
-            />
-            {playing !== i && (
-              <button
-                type="button"
-                className="results__play"
-                aria-label={`Воспроизвести видео-отзыв ${i + 1}`}
-                onClick={() => startVideo(i)}
-              >
-                <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
-                  <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M20 16.5v15l12-7.5z" fill="currentColor" />
-                </svg>
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+      ))}
+    </Carousel>
+  )
+}
+
+function PhotoCarousel() {
+  return (
+    <Carousel title="Переписки" label="Переписки с учениками">
+      {SCREENSHOTS.map((s, i) => (
+        <div className="results__slide" key={s.src}>
+          <img
+            className="ph"
+            src={s.src}
+            width={s.width}
+            height={s.height}
+            loading="lazy"
+            decoding="async"
+            alt={`Скриншот отзыва ${i + 1}`}
+          />
+        </div>
+      ))}
+    </Carousel>
   )
 }
 
@@ -224,21 +172,7 @@ export default function Results() {
 
         <VideoCarousel />
 
-        <h3 className="results__subtitle">Переписки</h3>
-        <div className="results__shots">
-          {SCREENSHOTS.map((s, i) => (
-            <img
-              key={s.src}
-              className="ph"
-              src={s.src}
-              width={s.width}
-              height={s.height}
-              loading="lazy"
-              decoding="async"
-              alt={`Скриншот отзыва ${i + 1}`}
-            />
-          ))}
-        </div>
+        <PhotoCarousel />
       </div>
     </section>
   )
