@@ -1,10 +1,12 @@
-import { placeholder } from '../assets/placeholder.js'
+import about1 from '../assets/media/about-1.webp'
+import about2 from '../assets/media/about-2.webp'
+import about3 from '../assets/media/about-3.webp'
 
-// TODO: заменить на реальные фото (разные форматы)
+// width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала»
 const PHOTOS = [
-  { src: placeholder(4, 5), alt: 'Фото: Дарья на конюшне — заменить', cls: 'about__photo--tall' },
-  { src: placeholder(3, 2), alt: 'Фото: Дарья на турнире — заменить', cls: 'about__photo--wide' },
-  { src: placeholder(1, 1), alt: 'Фото: Дарья с учениками — заменить', cls: 'about__photo--square' },
+  { src: about1, width: 3024, height: 4032, alt: 'Дарья Борисова кормит лошадь с руки', cls: 'about__photo--tall' },
+  { src: about2, width: 5184, height: 3456, alt: 'Дарья Борисова ведёт лошадь в поводу на лугу', cls: 'about__photo--wide' },
+  { src: about3, width: 360, height: 640, alt: 'Дарья Борисова, портрет', cls: 'about__photo--square' },
 ]
 
 const ACHIEVEMENTS = [
@@ -72,8 +74,16 @@ export default function About() {
         </div>
         <div className="about__photos">
           {PHOTOS.map((p) => (
-            // TODO: заменить на реальное фото
-            <img key={p.alt} className={`ph about__photo ${p.cls}`} src={p.src} alt={p.alt} />
+            <img
+              key={p.src}
+              className={`ph about__photo ${p.cls}`}
+              src={p.src}
+              width={p.width}
+              height={p.height}
+              loading="lazy"
+              decoding="async"
+              alt={p.alt}
+            />
           ))}
         </div>
       </div>

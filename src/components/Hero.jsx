@@ -1,7 +1,4 @@
-import { placeholder } from '../assets/placeholder.js'
-
-// TODO: заменить на реальное фото (вертикальное 4:5)
-const HERO_PHOTO = placeholder(4, 5)
+import heroPhoto from '../assets/media/hero-photo.webp'
 
 export default function Hero() {
   return (
@@ -19,8 +16,15 @@ export default function Hero() {
             <a className="btn btn-hero-outline" href="#pricing">Узнать стоимость</a>
           </div>
         </div>
-        {/* TODO: заменить на реальное фото */}
-        <img className="ph hero__photo" src={HERO_PHOTO} alt="Фото: Дарья Борисова, преподаватель — заменить" />
+        {/* Первый экран: без loading="lazy", фото грузится сразу */}
+        <img
+          className="ph hero__photo"
+          src={heroPhoto}
+          width={2316}
+          height={3088}
+          fetchPriority="high"
+          alt="Дарья Борисова, преподаватель английского для конников"
+        />
       </div>
     </section>
   )
