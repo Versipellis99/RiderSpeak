@@ -1064,3 +1064,60 @@
     color: var(--color-dark-bg);
   }
 }
+
+/* Крупнее шрифты на компьютере (от 769px). Стоит в конце файла, чтобы перебивать базовые размеры; мобильная версия не меняется */
+@media (min-width: 769px) {
+  body {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 44px;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  .btn {
+    font-size: 18px;
+  }
+
+  .hero__sub {
+    font-size: 26px;
+  }
+
+  .hero__tagline {
+    font-size: 18px;
+  }
+
+  .services__who {
+    font-size: 15px;
+  }
+
+  .services__formats li {
+    font-size: 18px;
+  }
+
+  .escort__strip p {
+    font-size: 20px;
+  }
+
+  .lessons__intro {
+    font-size: 23px;
+  }
+
+  .results__label,
+  .results__case p,
+  .pricing__note {
+    font-size: 18px;
+  }
+
+  .results__case .results__role {
+    font-size: 16px;
+  }
+
+  .module-item__descr {
+    font-size: 16px;
+  }
+}
