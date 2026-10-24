@@ -20,10 +20,10 @@ export default function Hero() {
         <img
           className="ph hero__photo"
           src={heroPhoto}
-          width={2160}
-          height={3840}
+          width={1080}
+          height={1920}
           fetchPriority="high"
-          alt="Дарья Борисова с лошадью в поле"
+          alt="Дарья Борисова обнимает лошадь"
         />
       </div>
     </section>
