@@ -5,9 +5,9 @@ import about3 from '../assets/media/about3.1.webp'
 // width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала».
 // Порядок: горизонтальное фото сверху, под ним два вертикальных рядом
 const PHOTOS = [
-  { src: about2, width: 2560, height: 1706, alt: 'Дарья Борисова с лошадью на прогулке', cls: 'about__photo--wide' },
+  { src: about2, width: 1400, height: 933, alt: 'Дарья Борисова с лошадью на прогулке', cls: 'about__photo--wide' },
   { src: about3, width: 1179, height: 1934, alt: 'Дарья Борисова за ноутбуком на занятии', cls: 'about__photo--laptop' },
-  { src: about1, width: 1080, height: 1920, alt: 'Дарья Борисова подписывает учебник My Level', cls: 'about__photo--book' },
+  { src: about1, width: 800, height: 1422, alt: 'Дарья Борисова подписывает учебник My Level', cls: 'about__photo--book' },
 ]
 
 const ACHIEVEMENTS = [
