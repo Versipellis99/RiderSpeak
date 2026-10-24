@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../assets/media/hero-photo2.webp'
+import heroPhotoSmall from '../assets/media/hero-photo2-800.webp'
 
 const NAV = [
   { href: '#formats', label: 'Услуги' },
@@ -86,6 +87,8 @@ export default function Hero() {
           <img
             className="hero__photo"
             src={heroPhoto}
+            srcSet={`${heroPhotoSmall} 800w, ${heroPhoto} 1080w`}
+            sizes="(max-width: 600px) 100vw, 520px"
             width={1080}
             height={1920}
             fetchPriority="high"

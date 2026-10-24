@@ -246,6 +246,85 @@
   }
 }
 
+/* Телефон (до 600px): шапка лежит на светлом фоне фото, фото на всю ширину, под ним чёрная «шторка» с текстом.
+   Высота фото 375×485 — обрезано сверху на 3% от высоты исходной картинки, чтобы название и бургер
+   оказались на белом фоне над головой коня */
+@media (max-width: 600px) {
+  .hero {
+    padding-bottom: 0;
+  }
+
+  .hero__bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+  }
+
+  .hero__bar .brand,
+  .hero__bar .hero__burger {
+    color: var(--color-text);
+  }
+
+  .hero__bar .hero__burger {
+    border-color: rgba(69, 64, 70, 0.4);
+  }
+
+  /* На светлом фоне фокус-рамка кремовая не видна */
+  .hero__bar .brand:focus-visible,
+  .hero__bar .hero__burger:focus-visible {
+    outline-color: var(--color-text);
+  }
+
+  .hero__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 0;
+  }
+
+  .hero__media {
+    order: -1;
+    max-width: none;
+    margin-inline: -20px;
+  }
+
+  .hero__photo {
+    aspect-ratio: 375 / 485;
+    border-radius: 0;
+  }
+
+  .hero__caption {
+    display: none;
+  }
+
+  .hero__text {
+    position: relative;
+    margin: -32px -20px 0;
+    padding: 28px 20px 32px;
+    background: var(--color-dark);
+    border-radius: 28px 28px 0 0;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__sub {
+    margin-top: 16px;
+    font-size: 17px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+  }
+}
+
 /* Стрелка «назад» в правом нижнем углу: появляется после перехода в «Контакты» по кнопке */
 .back-btn {
   position: fixed;
@@ -974,6 +1053,13 @@
 
 .price-list__cta {
   margin-top: 32px;
+}
+
+/* На планшетах (до 1024px) прайс-лист по центру; на ПК слева, как раньше */
+@media (max-width: 1024px) {
+  .price-list {
+    margin-inline: auto;
+  }
 }
 
 /* Контакты */
