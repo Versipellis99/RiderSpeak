@@ -40,11 +40,34 @@
 }
 
 .hero__bar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   padding-block: 22px;
+}
+
+/* Кнопка-бургер: только там, где меню прячется (до 960px) */
+.hero__burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  color: var(--color-on-dark);
+  background: transparent;
+  border: 1px solid var(--color-on-dark-line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color var(--ease), color var(--ease);
+}
+
+@media (hover: hover) {
+  .hero__burger:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
 }
 
 .hero__nav {
@@ -164,9 +187,46 @@
   color: var(--color-on-dark-muted);
 }
 
+/* До 960px меню — выпадающая панель под строкой с названием, открывается бургером */
 @media (max-width: 960px) {
+  .hero__burger {
+    display: grid;
+  }
+
   .hero__nav {
     display: none;
+    position: absolute;
+    top: calc(100% - 8px);
+    right: 20px;
+    z-index: 10;
+    min-width: 220px;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px;
+    font-size: 17px;
+    background: var(--color-dark);
+    border: 1px solid var(--color-on-dark-line);
+    border-radius: var(--radius-card);
+  }
+
+  .hero__nav.is-open {
+    display: flex;
+  }
+
+  .hero__nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    color: var(--color-on-dark);
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 960px) and (hover: hover) {
+  .hero__nav a:hover {
+    background: var(--color-on-dark-card);
+    color: var(--color-accent);
   }
 }
 

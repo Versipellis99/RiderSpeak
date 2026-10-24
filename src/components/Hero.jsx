@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import heroPhoto from '../assets/media/hero-photo2.webp'
 
 const NAV = [
@@ -9,11 +10,57 @@ const NAV = [
 ]
 
 export default function Hero() {
+  // На телефоне и планшете меню прячется за кнопкой-бургером; на ПК (от 961px) видно сразу
+  const [open, setOpen] = useState(false)
+  const barRef = useRef(null)
+
+  // Меню закрывается по Esc и по нажатию вне него
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    const onPointer = (e) => {
+      if (barRef.current && !barRef.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onPointer)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onPointer)
+    }
+  }, [open])
+
   return (
     <section className="hero" id="hero">
-      <div className="container hero__bar">
+      <div className="container hero__bar" ref={barRef}>
         <a className="brand" href="#hero">RiderSpeaks</a>
-        <nav className="hero__nav" aria-label="Разделы сайта">
+        <button
+          type="button"
+          className="hero__burger"
+          aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
+          aria-expanded={open}
+          aria-controls="hero-nav"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path
+              d={open ? 'M6 6l12 12M18 6 6 18' : 'M4 7h16M4 12h16M4 17h16'}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+        <nav
+          id="hero-nav"
+          className={`hero__nav${open ? ' is-open' : ''}`}
+          aria-label="Разделы сайта"
+          onClick={(e) => {
+            if (e.target.closest('a')) setOpen(false)
+          }}
+        >
           {NAV.map((n) => (
             <a key={n.href} href={n.href}>{n.label}</a>
           ))}
