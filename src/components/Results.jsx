@@ -13,7 +13,6 @@ import video5 from '../assets/reviews/ВидеоОтзыв5.mp4'
 // TODO: заменить на реальные цифры
 const STATS = [
   { value: '50+', label: 'учеников' },
-  { value: '10+', label: 'выездов за рубеж' },
   { value: '100+', label: 'часов практики' },
 ]
 

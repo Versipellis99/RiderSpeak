@@ -603,13 +603,18 @@
 }
 
 /* Результаты */
+/* Две цифры компактной парой по центру, между ними тонкая линия */
 .results__stats {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 640px;
+  margin: var(--space-lg) auto 0;
   text-align: center;
+}
+
+.results__stats li + li {
+  border-left: 1px solid var(--color-on-dark-line);
 }
 
 .results__value {
@@ -932,10 +937,6 @@
 }
 
 @media (max-width: 768px) {
-  .results__stats {
-    gap: var(--space-xs);
-  }
-
   .results__value {
     font-size: 30px;
   }
