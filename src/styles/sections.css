@@ -779,6 +779,11 @@
   margin-top: var(--space-lg);
 }
 
+/* Кнопка без ссылки: визуально неактивная, клик показывает «скоро появится» */
+.contacts__group-btn--soon {
+  opacity: 0.6;
+}
+
 .contacts__socials {
   list-style: none;
   display: flex;

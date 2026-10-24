@@ -7,7 +7,7 @@ const stroke = {
 }
 
 const PHONE = { label: '+7 915 198 2782', href: 'tel:+79151982782' }
-const EMAIL = { label: 'dolinrose@mail.ru', href: 'mailto:dolinrose@mail.ru' }
+const EMAIL = { label: 'dariaborisovattc@gmail.com', href: 'mailto:dariaborisovattc@gmail.com' }
 
 // TODO: добавить ссылку на сообщество (после этого заглушка отключится сама)
 const GROUP = { label: 'Блог о конном мире', href: '#' }
@@ -36,7 +36,7 @@ const SOCIALS = [
   {
     name: 'ВКонтакте',
     title: 'ВКонтакте',
-    href: 'https://vk.ru/id36231583',
+    href: 'https://vk.ru/club241698666',
     external: true,
     icon: (
       <text x="12" y="16" textAnchor="middle" fontSize="11" fontWeight="600" fill="currentColor">
@@ -48,11 +48,17 @@ const SOCIALS = [
 
 const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
 
-// Пока ссылки нет (href="#"), клик ничего не делает: ни прыжка вверх, ни новой вкладки
+// Пока ссылки нет (href="#"), кнопка полупрозрачная, а клик показывает сообщение вместо перехода
 const isPlaceholder = GROUP.href === '#'
 const groupProps = isPlaceholder
-  ? { onClick: (e) => e.preventDefault() }
-  : externalProps
+  ? {
+      className: 'btn btn-outline contacts__group-btn--soon',
+      onClick: (e) => {
+        e.preventDefault()
+        alert('Ссылка на блог скоро появится!')
+      },
+    }
+  : { className: 'btn btn-outline', ...externalProps }
 
 export default function Contacts() {
   return (
@@ -85,7 +91,7 @@ export default function Contacts() {
         </ul>
 
         <div className="contacts__group">
-          <a className="btn btn-outline" href={GROUP.href} {...groupProps}>
+          <a href={GROUP.href} {...groupProps}>
             {GROUP.label}
           </a>
         </div>
