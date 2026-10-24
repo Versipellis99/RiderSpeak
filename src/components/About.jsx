@@ -1,12 +1,13 @@
-import about1 from '../assets/media/about-1.webp'
-import about2 from '../assets/media/about-2.webp'
-import about3 from '../assets/media/about-3.webp'
+import about1 from '../assets/media/about1.1.webp'
+import about2 from '../assets/media/about2.1.webp'
+import about3 from '../assets/media/about3.1.webp'
 
-// width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала»
+// width/height нужны браузеру, чтобы заранее зарезервировать место и страница не «прыгала».
+// Порядок: горизонтальное фото сверху, под ним два вертикальных рядом
 const PHOTOS = [
-  { src: about3, width: 360, height: 640, alt: 'Дарья Борисова на занятии', cls: 'about__photo--tall' },
-  { src: about2, width: 5184, height: 3456, alt: 'Дарья Борисова ведёт лошадь в поводу на лугу', cls: 'about__photo--wide' },
-  { src: about1, width: 3024, height: 4032, alt: 'Дарья Борисова кормит лошадь с руки', cls: 'about__photo--square' },
+  { src: about2, width: 2560, height: 1706, alt: 'Дарья Борисова с лошадью на прогулке', cls: 'about__photo--wide' },
+  { src: about3, width: 1179, height: 1934, alt: 'Дарья Борисова за ноутбуком на занятии', cls: 'about__photo--laptop' },
+  { src: about1, width: 1080, height: 1920, alt: 'Дарья Борисова подписывает учебник My Level', cls: 'about__photo--book' },
 ]
 
 const ACHIEVEMENTS = [

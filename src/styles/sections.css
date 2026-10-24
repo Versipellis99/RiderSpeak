@@ -253,22 +253,28 @@
   align-items: start;
 }
 
-/* Раскладка как в LandingV2: широкое фото сверху, два снизу рядом — колонка ниже текста, поэтому фото успевают «постоять» */
+/* Горизонтальное фото (3:2) сверху на всю ширину, два вертикальных снизу рядом, обрезаны до 4:5.
+   Колонка ниже текста, поэтому фото успевают «постоять» при прокрутке */
 .about__photo--wide {
   grid-column: 1 / -1;
-  order: -1;
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
 
-.about__photo--tall,
-.about__photo--square {
+.about__photo--laptop,
+.about__photo--book {
   aspect-ratio: 4 / 5;
   object-fit: cover;
 }
 
-.about__photo--square {
-  object-position: center 30%;
+/* За ноутбуком: видны лицо и руки на клавиатуре */
+.about__photo--laptop {
+  object-position: center 40%;
+}
+
+/* С учебником: срезан пустой фон сверху, видны лицо и обложка My Level */
+.about__photo--book {
+  object-position: center 80%;
 }
 
 .about__subtitle {
