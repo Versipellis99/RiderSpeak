@@ -243,25 +243,31 @@
   margin-top: var(--space-md);
 }
 
+/* Фото стоят на месте, пока прокручивается текст (как в LandingV2); до 768px — обычный поток */
 .about__photos {
+  position: sticky;
+  top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-sm);
   align-items: start;
 }
 
-.about__photo--tall {
-  grid-row: span 2;
+/* Раскладка как в LandingV2: широкое фото сверху, два снизу рядом — колонка ниже текста, поэтому фото успевают «постоять» */
+.about__photo--wide {
+  grid-column: 1 / -1;
+  order: -1;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
 }
 
-.about__photo--wide {
-  grid-column: 2;
+.about__photo--tall,
+.about__photo--square {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
 }
 
 .about__photo--square {
-  grid-column: 1 / -1;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
   object-position: center 30%;
 }
 
@@ -298,56 +304,90 @@
   border-top: 1px solid var(--color-accent);
 }
 
-/* Услуги */
-.services__grid {
+/* Для кого (перенесено из LandingV2): 4 колонки с разделителями, до 1100px — 2×2, до 600px — одна колонка */
+.audience {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: var(--space-lg);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
 }
 
-/* 4 карточки: уже 1240px плашка «Выезжающие за рубеж» не помещается в строку, поэтому 2×2 (до 768px — одна колонка, правило ниже) */
-@media (max-width: 1240px) {
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.audience__item {
+  padding: clamp(24px, 2.6vw, 40px) clamp(20px, 2vw, 32px);
+  border-left: 1px solid var(--color-line);
 }
 
-.services__card {
-  padding: var(--space-md) 20px;
+.audience__item:first-child {
+  padding-left: 0;
+  border-left: 0;
 }
 
-.services__who {
-  display: inline-block;
-  padding: 4px 12px;
-  background: var(--color-accent);
-  color: var(--color-text);
-  border-radius: var(--radius-btn);
-  font-size: 14px;
+.audience__who {
+  margin-bottom: 14px;
+  font-size: var(--fs-sm);
   font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  margin: 0 0 8px 0;
+  color: var(--color-muted);
 }
 
-.services__formats-title {
-  margin-top: var(--space-xl);
+.audience__item h3 {
+  margin-bottom: 12px;
+  font-weight: 500;
 }
 
-.services__formats {
+.audience__what {
+  color: var(--color-muted);
+}
+
+.formats-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: clamp(40px, 5vw, 72px);
+}
+
+.formats-row ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
-  margin-top: var(--space-sm);
+  gap: 10px;
 }
 
-.services__formats li {
+.formats-row li {
   padding: 10px 22px;
-  font-size: 17px;
-  font-weight: 400;
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-btn);
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 1100px) {
+  .audience {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .audience__item:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .audience__item:nth-child(n + 3) {
+    border-top: 1px solid var(--color-line);
+  }
+}
+
+@media (max-width: 600px) {
+  .audience {
+    grid-template-columns: 1fr;
+  }
+
+  .audience__item {
+    padding-inline: 0;
+    border-left: 0;
+  }
+
+  .audience__item:nth-child(n + 2) {
+    border-top: 1px solid var(--color-line);
+  }
 }
 
 /* Сопровождение */
@@ -380,8 +420,8 @@
     gap: var(--space-lg);
   }
 
-  .services__grid {
-    grid-template-columns: 1fr;
+  .about__photos {
+    position: static;
   }
 
   .problems__item {
@@ -1164,14 +1204,6 @@
     font-size: 18px;
   }
 
-  .services__who {
-    font-size: 15px;
-  }
-
-  .services__formats li {
-    font-size: 18px;
-  }
-
   .escort__strip p {
     font-size: 20px;
   }
@@ -1192,5 +1224,11 @@
 
   .module-item__descr {
     font-size: 16px;
+  }
+
+  /* «Пробный урок» на ПК — белая рамка (и при наведении); на телефоне остаётся акцентная */
+  .section--dark .pricing__card--free,
+  .section--dark .pricing__card--free:hover {
+    border-color: var(--color-white);
   }
 }

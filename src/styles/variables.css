@@ -38,7 +38,11 @@
   /* Первый экран и подвал (перенесены из LandingV2): плавные размеры шрифта */
   --fs-sm: clamp(15px, 0.15vw + 14.5px, 16px);
   --fs-lead: clamp(19px, 0.55vw + 17px, 24px);
-  --fs-h1: clamp(40px, 4.4vw + 24px, 84px);
+  --fs-h1: clamp(40px, 2.6vw + 27px, 64px);
+
+  /* Блок «Для кого» (перенесён из LandingV2) */
+  --color-muted: rgba(69, 64, 70, 0.74);
+  --color-line: rgba(69, 64, 70, 0.18);
   --radius-pill: 999px;
   --radius-media: 6px;
   --ease: 0.2s ease-in-out;

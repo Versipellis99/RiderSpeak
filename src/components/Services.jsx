@@ -28,21 +28,24 @@ export default function Services() {
     <section className="section" id="services">
       <div className="container">
         <h2>Для кого</h2>
-        <div className="services__grid">
+        {/* Разметка и стили перенесены из LandingV2 */}
+        <div className="audience">
           {SERVICES.map((s) => (
-            <article className="card services__card" key={s.title}>
-              <p className="services__who">{s.who}</p>
+            <article className="audience__item" key={s.title}>
+              <p className="audience__who">{s.who}</p>
               <h3>{s.title}</h3>
-              <p>{s.what}</p>
+              <p className="audience__what">{s.what}</p>
             </article>
           ))}
         </div>
-        <h3 className="services__formats-title">Форматы проведения</h3>
-        <ul className="services__formats">
-          {FORMATS.map((f) => (
-            <li key={f}>{f}</li>
-          ))}
-        </ul>
+        <div className="formats-row">
+          <h3>Форматы проведения</h3>
+          <ul>
+            {FORMATS.map((f) => (
+              <li key={f}>{f}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   )
