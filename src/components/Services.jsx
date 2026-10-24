@@ -32,8 +32,9 @@ export default function Services() {
         <div className="audience">
           {SERVICES.map((s) => (
             <article className="audience__item" key={s.title}>
-              <p className="audience__who">{s.who}</p>
-              <h3>{s.title}</h3>
+              {/* Крупно — аудитория, мелко под ней — тема */}
+              <h3>{s.who}</h3>
+              <p className="audience__topic">{s.title}</p>
               <p className="audience__what">{s.what}</p>
             </article>
           ))}

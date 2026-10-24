@@ -329,16 +329,16 @@
   border-left: 0;
 }
 
-.audience__who {
+.audience__item h3 {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.audience__topic {
   margin-bottom: 14px;
   font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--color-muted);
-}
-
-.audience__item h3 {
-  margin-bottom: 12px;
-  font-weight: 500;
 }
 
 .audience__what {
