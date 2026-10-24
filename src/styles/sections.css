@@ -863,7 +863,7 @@
   color: inherit;
   background: none;
   border: 0;
-  cursor: copy;
+  cursor: pointer;
 }
 
 /* Подсказка «Почта скопирована» под адресом */
@@ -896,11 +896,6 @@
 
 .contacts__group {
   margin-top: var(--space-lg);
-}
-
-/* Кнопка без ссылки: визуально неактивная, клик показывает «скоро появится» */
-.contacts__group-btn--soon {
-  opacity: 0.6;
 }
 
 .contacts__socials {

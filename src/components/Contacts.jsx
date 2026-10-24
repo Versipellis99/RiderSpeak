@@ -55,8 +55,7 @@ function EmailCopy() {
   )
 }
 
-// TODO: добавить ссылку на сообщество (после этого заглушка отключится сама)
-const GROUP = { label: 'Блог о конном мире', href: '#' }
+const GROUP = { label: 'Блог о конном мире', href: 'https://t.me/daria_teatimeclub' }
 
 const SOCIALS = [
   {
@@ -94,18 +93,6 @@ const SOCIALS = [
 
 const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
 
-// Пока ссылки нет (href="#"), кнопка полупрозрачная, а клик показывает сообщение вместо перехода
-const isPlaceholder = GROUP.href === '#'
-const groupProps = isPlaceholder
-  ? {
-      className: 'btn btn-outline contacts__group-btn--soon',
-      onClick: (e) => {
-        e.preventDefault()
-        alert('Ссылка на блог скоро появится!')
-      },
-    }
-  : { className: 'btn btn-outline', ...externalProps }
-
 export default function Contacts() {
   return (
     <section className="section" id="contacts">
@@ -137,7 +124,7 @@ export default function Contacts() {
         </ul>
 
         <div className="contacts__group">
-          <a href={GROUP.href} {...groupProps}>
+          <a className="btn btn-outline" href={GROUP.href} {...externalProps}>
             {GROUP.label}
           </a>
         </div>
