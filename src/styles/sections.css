@@ -202,9 +202,16 @@
 /* Услуги */
 .services__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
   margin-top: var(--space-lg);
+}
+
+/* 4 карточки: на средних экранах 2×2 (до 768px — одна колонка, правило ниже) */
+@media (max-width: 1100px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .services__card {
