@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 const stroke = {
   fill: 'none',
   stroke: 'currentColor',
@@ -7,7 +9,51 @@ const stroke = {
 }
 
 const PHONE = { label: '+7 915 198 2782', href: 'tel:+79151982782' }
-const EMAIL = { label: 'dariaborisovattc@gmail.com', href: 'mailto:dariaborisovattc@gmail.com' }
+const EMAIL = 'dariaborisovattc@gmail.com'
+
+// Копирование в буфер. navigator.clipboard работает только по https и на localhost,
+// поэтому для просмотра с телефона по адресу в локальной сети есть запасной способ
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    const area = document.createElement('textarea')
+    area.value = text
+    area.setAttribute('readonly', '')
+    area.style.position = 'fixed'
+    area.style.opacity = '0'
+    document.body.appendChild(area)
+    area.select()
+    const ok = document.execCommand('copy')
+    area.remove()
+    return ok
+  }
+}
+
+// Почта копируется по нажатию: без ссылки и перехода в почтовую программу
+function EmailCopy() {
+  const [copied, setCopied] = useState(false)
+  const timer = useRef(null)
+
+  useEffect(() => () => clearTimeout(timer.current), [])
+
+  const onClick = async () => {
+    if (!(await copyText(EMAIL))) return
+    setCopied(true)
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button type="button" className="contacts__email" title="Нажмите, чтобы скопировать" onClick={onClick}>
+      {EMAIL}
+      <span className={`contacts__copied${copied ? ' is-shown' : ''}`} role="status">
+        {copied ? 'Почта скопирована' : ''}
+      </span>
+    </button>
+  )
+}
 
 // TODO: добавить ссылку на сообщество (после этого заглушка отключится сама)
 const GROUP = { label: 'Блог о конном мире', href: '#' }
@@ -69,7 +115,7 @@ export default function Contacts() {
 
         <div className="contacts__direct">
           <a className="contacts__phone" href={PHONE.href}>{PHONE.label}</a>
-          <a className="contacts__email" href={EMAIL.href}>{EMAIL.label}</a>
+          <EmailCopy />
         </div>
 
         <ul className="contacts__socials">

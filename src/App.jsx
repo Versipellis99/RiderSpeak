@@ -10,6 +10,7 @@ import Results from './components/Results.jsx'
 import Dictionary from './components/Dictionary.jsx'
 import Pricing from './components/Pricing.jsx'
 import Contacts from './components/Contacts.jsx'
+import Footer from './components/Footer.jsx'
 
 // Переходы по якорям (#contacts, #pricing...) одинаково на ПК и на тач-устройствах
 function useAnchorScroll() {
@@ -68,18 +69,21 @@ export default function App() {
   useAnchorScroll()
 
   return (
-    <main>
-      <Hero />
-      <Problems />
-      <About />
-      <Services />
-      <Formats />
-      <Escort />
-      <Lessons />
-      <Results />
-      <Dictionary />
-      <Pricing />
-      <Contacts />
-    </main>
+    <>
+      <main>
+        <Hero />
+        <Problems />
+        <About />
+        <Services />
+        <Formats />
+        <Escort />
+        <Lessons />
+        <Results />
+        <Dictionary />
+        <Pricing />
+        <Contacts />
+      </main>
+      <Footer />
+    </>
   )
 }

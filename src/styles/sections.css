@@ -24,87 +24,186 @@
   object-fit: cover;
 }
 
-/* Hero */
+/* Hero (перенесён из LandingV2) */
 .hero {
   background: var(--color-dark);
-  color: var(--color-bg);
-  padding: var(--space-2xl) 0;
+  color: var(--color-on-dark);
+  padding-bottom: clamp(56px, 7vw, 112px);
   contain: paint;
 }
 
-.hero__inner {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
+.brand {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
 }
 
-/* Фото 1080×1920 (9:16): сверху ~30% пустого светлого фона, поэтому показываем нижнюю часть в пропорции 4:5 (1080×1350). Для другого фото подберите пропорцию */
-.hero__photo {
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center bottom;
-}
-
-.hero__sub {
-  margin-top: var(--space-md);
-  font-size: 24px;
-  line-height: 1.4;
-}
-
-.hero__tagline {
-  max-width: 520px;
-  margin: var(--space-sm) 0 0 0;
-  font-size: 16px;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--color-accent-hover);
-}
-
-.hero__actions {
+.hero__bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-lg);
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 22px;
 }
 
-.btn-hero {
-  padding: 16px 32px;
-  background: var(--color-bg);
-  color: var(--color-text);
-  border: 2px solid var(--color-bg);
-  border-radius: var(--radius-btn);
+.hero__nav {
+  display: flex;
+  gap: clamp(18px, 2.2vw, 36px);
+  font-size: var(--fs-sm);
 }
 
-@media (hover: hover) {
-  .btn-hero:hover {
-    background: var(--color-accent-hover);
-    border-color: var(--color-accent-hover);
-  }
-}
-
-.btn-hero-outline {
-  padding: 14px 32px;
-  color: var(--color-bg);
-  border: 3px solid var(--color-bg);
-  border-radius: var(--radius-rect);
+.hero__nav a {
+  padding-block: 10px;
+  color: var(--color-on-dark-muted);
+  text-decoration: none;
+  transition: color var(--ease);
 }
 
 @media (hover: hover) {
-  .btn-hero-outline:hover {
-    background: var(--color-bg);
-    color: var(--color-text);
+  .hero__nav a:hover {
+    color: var(--color-on-dark);
   }
 }
 
+.hero__body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 88px);
+  align-items: center;
+  padding-top: clamp(24px, 4vw, 64px);
+}
+
+/* Цвет заголовка задан владельцем. Хаки против мерцания в Chrome оставлены (см. CLAUDE.md) */
 .hero h1 {
+  font-size: var(--fs-h1);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: #f0c9a8;
   will-change: transform;
   transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
+}
+
+.hero__sub {
+  max-width: 34em;
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--color-on-dark-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(28px, 3.5vw, 48px);
+}
+
+/* Кнопки первого экрана */
+.btn--light,
+.btn--ghost-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 30px;
+  border: 1.5px solid;
+  border-radius: var(--radius-pill);
+  font-size: 17px;
+  transition:
+    background-color var(--ease),
+    color var(--ease),
+    border-color var(--ease);
+}
+
+.btn--light {
+  background: var(--color-bg);
+  border-color: var(--color-bg);
+  color: var(--color-dark);
+}
+
+.btn--ghost-light {
+  background: transparent;
+  border-color: rgba(253, 245, 238, 0.5);
+  color: var(--color-on-dark);
+}
+
+@media (hover: hover) {
+  .btn--light:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .btn--ghost-light:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+}
+
+.hero__media {
+  margin: 0;
+}
+
+/* Фото 1080×1920 (9:16): сверху ~30% пустого светлого фона, поэтому показываем нижнюю часть в пропорции 4:5 */
+.hero__photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center bottom;
+  border-radius: var(--radius-media);
+}
+
+.hero__caption {
+  margin-top: 14px;
+  font-size: var(--fs-sm);
+  color: var(--color-on-dark-muted);
+}
+
+@media (max-width: 960px) {
+  .hero__nav {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero__body {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__media {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__actions .btn {
+    width: 100%;
+  }
+}
+
+/* Подвал (перенесён из LandingV2) */
+.footer {
+  padding-block: 28px;
+  background: var(--color-dark);
+  color: var(--color-on-dark-muted);
+  font-size: var(--fs-sm);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.footer .brand {
+  color: var(--color-on-dark);
 }
 
 /* Проблемы */
@@ -207,15 +306,15 @@
   margin-top: var(--space-lg);
 }
 
-/* 4 карточки: на средних экранах 2×2 (до 768px — одна колонка, правило ниже) */
-@media (max-width: 1100px) {
+/* 4 карточки: уже 1240px плашка «Выезжающие за рубеж» не помещается в строку, поэтому 2×2 (до 768px — одна колонка, правило ниже) */
+@media (max-width: 1240px) {
   .services__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .services__card {
-  padding: var(--space-md);
+  padding: var(--space-md) 20px;
 }
 
 .services__who {
@@ -226,7 +325,7 @@
   border-radius: var(--radius-btn);
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   margin: 0 0 8px 0;
 }
@@ -276,65 +375,6 @@
 }
 
 @media (max-width: 768px) {
-  .hero {
-    padding: 40px 0 48px;
-  }
-
-  .hero__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .hero__text {
-    max-width: 560px;
-  }
-
-  .hero h1 {
-    margin-bottom: 20px;
-    font-size: 34px;
-    font-weight: 500;
-    line-height: 1.15;
-  }
-
-  .hero__sub {
-    margin: 0 0 24px 0;
-    font-size: 17px;
-    line-height: 1.5;
-    opacity: 0.85;
-  }
-
-  .hero__tagline {
-    margin: 0 0 32px 0;
-    padding: 2px 0 2px 14px;
-    font-size: 15px;
-    border-left: 2px solid var(--color-accent-hover);
-  }
-
-  .hero__actions {
-    flex-direction: column;
-    gap: 12px;
-    margin: 0 0 40px 0;
-  }
-
-  .hero__actions .btn {
-    width: 100%;
-    padding: 16px 24px;
-    font-size: 16px;
-    text-align: center;
-  }
-
-  .hero__actions .btn-hero-outline {
-    padding: 14px 24px;
-    border-width: 2px;
-  }
-
-  .hero__photo {
-    width: 100%;
-    max-width: 560px;
-    margin: 0;
-  }
-
   .about__inner {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
@@ -765,7 +805,35 @@
 }
 
 .contacts__email {
+  position: relative;
+  padding: 0;
+  font-family: inherit;
   font-size: 22px;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: copy;
+}
+
+/* Подсказка «Почта скопирована» под адресом */
+.contacts__copied {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  padding: 4px 12px;
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--color-bg);
+  background: var(--color-text);
+  border-radius: var(--radius-btn);
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.contacts__copied.is-shown {
+  opacity: 1;
 }
 
 @media (hover: hover) {
@@ -991,6 +1059,14 @@
   }
 }
 
+/* Самые узкие телефоны (320px): кнопка «Посмотреть примеры модулей» в одну строку */
+@media (max-width: 380px) {
+  .lessons__modules-btn {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
 /* Тёмные секции: фон и текст, затем карточки, кнопки, подписи */
 .section--dark {
   background: var(--color-dark-bg);
@@ -1085,14 +1161,6 @@
   }
 
   .btn {
-    font-size: 18px;
-  }
-
-  .hero__sub {
-    font-size: 26px;
-  }
-
-  .hero__tagline {
     font-size: 18px;
   }
 
