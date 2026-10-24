@@ -649,6 +649,11 @@
   flex-grow: 0;
 }
 
+/* Отзыв из нескольких абзацев */
+.results__case .results__text + .results__text {
+  margin-top: 12px;
+}
+
 .results__author {
   margin-top: auto;
   padding-top: var(--space-md);

@@ -1,3 +1,5 @@
+import glossaryPdf from '../assets/documents/Glossary.pdf'
+
 const TOPICS = [
   '100 главных терминов выездки на английском',
   'Как называются части амуниции: полный глоссарий',
@@ -18,8 +20,8 @@ export default function Dictionary() {
             ))}
           </ul>
         </div>
-        {/* TODO: положить файл в public/, указать путь (href="/dictionary.pdf") и убрать onClick */}
-        <a className="btn btn-primary" href="#" onClick={(e) => e.preventDefault()}>
+        {/* PDF открывается в новой вкладке (просмотр в браузере, оттуда его можно сохранить) */}
+        <a className="btn btn-primary" href={glossaryPdf} target="_blank" rel="noopener noreferrer">
           Скачать PDF
         </a>
       </div>
