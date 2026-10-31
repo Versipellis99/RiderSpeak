@@ -6,17 +6,22 @@ const GROUPS = [
   {
     title: 'Занятия',
     items: [
-      { title: 'Разовое занятие', price: '5 000 ₽' },
-      { title: 'Пакет 4 занятий', price: '12 000 ₽', note: 'Системная работа над базой' },
+      { title: 'Полный курс', price: '50 000 ₽', note: 'Системная программа из 19 уроков' },
+      { title: 'Разовая консультация', price: '5 000 ₽' },
       { title: 'Пакет 8 занятий', price: '24 000 ₽', note: 'Для глубокого погружения в язык' },
+      { title: 'Подготовка к выезду', price: '10 000 ₽', note: '3 занятия с фокусом на конкретное событие' },
     ],
   },
   {
-    title: 'Клуб и интенсив',
+    title: 'Разговорный клуб',
     items: [
-      { title: 'Разговорный клуб', price: '2 000 ₽', note: 'Абонемент на месяц' },
-      { title: 'Интенсив перед турниром', price: '10 000 ₽', note: '3 занятия с фокусом на конкретное событие' },
+      { title: 'Разговорный клуб', price: '2 000 ₽', note: 'Разовое посещение' },
+      { title: 'Разговорный клуб', price: '8 000 ₽', note: 'Абонемент на месяц' },
     ],
+  },
+  // Группа без заголовка: одна строка
+  {
+    items: [{ title: 'Перевод и озвучка', price: 'По договорённости' }],
   },
 ]
 
@@ -43,11 +48,11 @@ export default function Pricing() {
             <PriceRow item={FREE} free />
           </ul>
           {GROUPS.map((g) => (
-            <div className="price-group" key={g.title}>
-              <h3 className="price-group__title">{g.title}</h3>
+            <div className="price-group" key={g.items[0].title}>
+              {g.title && <h3 className="price-group__title">{g.title}</h3>}
               <ul>
                 {g.items.map((item) => (
-                  <PriceRow item={item} key={item.title} />
+                  <PriceRow item={item} key={`${item.title}-${item.price}`} />
                 ))}
               </ul>
             </div>

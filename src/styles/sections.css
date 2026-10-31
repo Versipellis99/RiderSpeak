@@ -498,7 +498,7 @@
 /* Для кого (перенесено из LandingV2): 4 колонки с разделителями, до 1100px — 2×2, до 600px — одна колонка */
 .audience {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: var(--space-lg);
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
@@ -551,22 +551,8 @@
   border-radius: var(--radius-pill);
 }
 
-@media (max-width: 1100px) {
-  .audience {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .audience__item:nth-child(odd) {
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .audience__item:nth-child(n + 3) {
-    border-top: 1px solid var(--color-line);
-  }
-}
-
-@media (max-width: 600px) {
+/* Три колонки до 860px, дальше одна (две колонки оставили бы третью карточку одну в ряду) */
+@media (max-width: 860px) {
   .audience {
     grid-template-columns: 1fr;
   }
