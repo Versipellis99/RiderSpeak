@@ -77,7 +77,7 @@ export default function Pricing() {
               </ul>
             </div>
           ))}
-          <a className="btn btn-primary price-list__cta" href="#contacts">Записаться на пробный урок</a>
+          <a className="btn btn-primary price-list__cta" href="#contacts">Записаться на бесплатный пробный урок</a>
         </div>
       </div>
     </section>

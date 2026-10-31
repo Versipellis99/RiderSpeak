@@ -77,7 +77,7 @@ export default function Hero() {
             и вывода ваших продуктов на международный рынок
           </p>
           <div className="hero__actions">
-            <a className="btn btn--light" href="#contacts">Записаться на пробный урок</a>
+            <a className="btn btn--light" href="#contacts">Записаться на бесплатный пробный урок</a>
             <a className="btn btn--ghost-light" href="#pricing">Узнать стоимость</a>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function Hero() {
             fetchPriority="high"
             alt="Дарья Борисова обнимает лошадь"
           />
-          <figcaption className="hero__caption">Редкая специализация: английский для конников</figcaption>
+          <figcaption className="hero__caption">9 лет — коневладелец и преподаватель английского</figcaption>
         </figure>
       </div>
     </section>

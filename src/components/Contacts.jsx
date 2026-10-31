@@ -101,7 +101,7 @@ export default function Contacts() {
             <img
               src={footerPhoto}
               width={941}
-              height={1672}
+              height={1070}
               loading="lazy"
               decoding="async"
               alt="Дарья Борисова на фоне конюшни"

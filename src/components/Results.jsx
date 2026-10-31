@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Carousel from './Carousel.jsx'
+import Lightbox from './Lightbox.jsx'
 import photo1 from '../assets/reviews/review1.webp'
 import photo2 from '../assets/reviews/review2.webp'
 import photo3 from '../assets/reviews/review3.webp'
@@ -130,22 +131,42 @@ function VideoCarousel() {
 }
 
 function PhotoCarousel() {
+  // Номер фото, открытого на весь экран, или null
+  const [openIndex, setOpenIndex] = useState(null)
+
   return (
-    <Carousel title="Переписки" label="Переписки с учениками">
-      {SCREENSHOTS.map((s, i) => (
-        <div className="results__slide" key={s.src}>
-          <img
-            className="ph"
-            src={s.src}
-            width={s.width}
-            height={s.height}
-            loading="lazy"
-            decoding="async"
-            alt={`Скриншот отзыва ${i + 1}`}
-          />
-        </div>
-      ))}
-    </Carousel>
+    <>
+      <Carousel title="Переписки" label="Переписки с учениками">
+        {SCREENSHOTS.map((s, i) => (
+          <div className="results__slide" key={s.src}>
+            <button
+              type="button"
+              className="results__zoom"
+              aria-label={`Открыть скриншот отзыва ${i + 1} на весь экран`}
+              onClick={() => setOpenIndex(i)}
+            >
+              <img
+                className="ph"
+                src={s.src}
+                width={s.width}
+                height={s.height}
+                loading="lazy"
+                decoding="async"
+                alt={`Скриншот отзыва ${i + 1}`}
+              />
+            </button>
+          </div>
+        ))}
+      </Carousel>
+      {openIndex !== null && (
+        <Lightbox
+          photos={SCREENSHOTS}
+          index={openIndex}
+          onClose={() => setOpenIndex(null)}
+          onChange={setOpenIndex}
+        />
+      )}
+    </>
   )
 }
 

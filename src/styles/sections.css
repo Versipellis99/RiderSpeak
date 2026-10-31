@@ -979,6 +979,93 @@
   scroll-snap-align: start;
 }
 
+/* Фото переписки: кнопка вокруг, чтобы открыть на весь экран */
+.results__zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: zoom-in;
+}
+
+.results__zoom .ph {
+  display: block;
+}
+
+/* Просмотр фото на весь экран */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.92);
+  overscroll-behavior: contain;
+}
+
+.lightbox__img {
+  display: block;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+  max-height: 100dvh;
+  object-fit: contain;
+  cursor: zoom-in;
+}
+
+.lightbox__img.is-zoomed {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+.lightbox__btn {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: var(--color-bg);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--color-on-dark-line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.lightbox__close {
+  top: var(--space-sm);
+  right: var(--space-sm);
+}
+
+.lightbox__prev,
+.lightbox__next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__prev {
+  left: var(--space-sm);
+}
+
+.lightbox__next {
+  right: var(--space-sm);
+}
+
+@media (hover: hover) {
+  .lightbox__btn:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+}
+
+.lightbox :focus-visible {
+  outline-color: var(--color-bg);
+}
+
 .results__media {
   display: block;
   aspect-ratio: 9 / 16;
@@ -1126,15 +1213,12 @@
   }
 }
 
-/* Контакты: тёплая панель, слева текст и ссылки, справа фото */
+/* Контакты: слева текст и ссылки, справа фото; фон тот же, что у раздела */
 .contacts__panel {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: var(--space-lg);
-  align-items: stretch;
-  padding: var(--space-lg);
-  background: var(--color-accent-soft);
-  border-radius: 28px;
+  gap: var(--space-xl);
+  align-items: center;
 }
 
 .contacts__text {
@@ -1230,7 +1314,8 @@
 }
 
 .contacts__photo {
-  min-height: 320px;
+  aspect-ratio: 941 / 1070;
+  max-height: 560px;
   overflow: hidden;
   background: var(--color-accent);
   border-radius: 20px;
@@ -1289,9 +1374,7 @@
 
   .contacts__panel {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
-    padding: 24px 20px;
-    border-radius: 20px;
+    gap: var(--space-lg);
   }
 
   .contacts__tg {
@@ -1301,8 +1384,7 @@
   }
 
   .contacts__photo {
-    min-height: 0;
-    aspect-ratio: 4 / 5;
+    max-height: none;
   }
 
   .btn {
