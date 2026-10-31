@@ -13,12 +13,21 @@ import video4 from '../assets/reviews/ВидеоОтзыв4.mp4'
 import video5 from '../assets/reviews/ВидеоОтзыв5.mp4'
 
 // TODO: заменить на реальные цифры
+const stroke = {
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.4,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+}
+
 const STAT = { value: '50+', label: 'учеников' }
 
 // text — строка с кавычками «» или массив абзацев (тогда кавычки ставятся при выводе)
 const CASES = [
   {
     name: 'Ульяна Бойко',
+    href: 'https://share.google/qjNGnJXb8NaR9Auo7',
     role: 'Специалист по биомеханике лошадей и выездке',
     text: [
       'Я могу с уверенностью рекомендовать Дарью как организатора мероприятий и как переводчика. Это человек, которому можно передать часть своей работы и действительно перестать о ней беспокоиться.',
@@ -28,11 +37,13 @@ const CASES = [
   },
   {
     name: 'Алиса Таракановская',
+    href: 'https://www.instagram.com/konoblog_alisa',
     role: 'Ветеринарный врач, тренер по мягким методикам',
     text: '«Такой курс конного английского — уникальная возможность для конников! Темы выстроены последовательно: новые слова и фразы сразу можно применять на практике. Особенно понравились блоки по анатомии лошади и работе в руках. Но самое главное — это атмосфера. Мне не страшно совершать ошибки и пробовать говорить, потому что Дарья не осудит, а спокойно подскажет и объяснит»',
   },
   {
     name: 'Ксения Болотина',
+    href: 'https://www.instagram.com/ksyyshaa_b',
     role: 'Троеборец национальной сборной России, тренер и берейтор',
     text: '«Курс помог мне преодолеть языковой барьер: теперь я уверенно общаюсь с тренером на английском и понимаю тонкости тренировочного процесса. Особенно ценю реальную практическую пользу — разбор терминологии и диалогов со спортсменами»',
   },
@@ -202,7 +213,24 @@ export default function Results() {
                 <p className="results__text">{c.text}</p>
               )}
               <div className="results__author">
-                <p className="results__name">{c.name}</p>
+                <p className="results__name">
+                  {c.href ? (
+                    <a
+                      className="results__name-link"
+                      href={c.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${c.name} (откроется в новой вкладке)`}
+                    >
+                      {c.name}
+                      <svg className="results__name-arrow" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+                        <path d="M3 9 9 3M4 3h5v5" {...stroke} />
+                      </svg>
+                    </a>
+                  ) : (
+                    c.name
+                  )}
+                </p>
                 {c.role && <p className="results__role">{c.role}</p>}
               </div>
             </article>

@@ -905,6 +905,29 @@
   margin: 0;
 }
 
+/* Имя автора отзыва — ссылка на его страницу: тонкое подчёркивание и стрелка ↗ */
+.results__name-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-hover);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+  transition: 0.2s ease-in-out;
+}
+
+.results__name-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: baseline;
+  color: var(--color-accent-hover);
+}
+
+@media (hover: hover) {
+  .results__name-link:hover {
+    text-decoration-color: var(--color-on-dark);
+  }
+}
+
 .results__case .results__role {
   margin-top: 4px;
   margin-bottom: 0;
