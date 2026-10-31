@@ -4,6 +4,7 @@ import photo1 from '../assets/reviews/ФотоОтзыв1.webp'
 import photo2 from '../assets/reviews/ФотоОтзыв2.webp'
 import photo3 from '../assets/reviews/ФотоОтзыв3.webp'
 import photo4 from '../assets/reviews/ФотоОтзыв4.webp'
+import photo5 from '../assets/reviews/ФотоОтзыв5.webp'
 import video1 from '../assets/reviews/ВидеоОтзыв1.mp4'
 import video2 from '../assets/reviews/ВидеоОтзыв2.mp4'
 import video3 from '../assets/reviews/ВидеоОтзыв3.mp4'
@@ -45,8 +46,9 @@ const VIDEOS = [video1, video2, video3, video4, video5]
 const SCREENSHOTS = [
   { src: photo1, width: 750, height: 1333 },
   { src: photo2, width: 750, height: 1333 },
-  { src: photo3, width: 750, height: 1333 },
+  { src: photo3, width: 720, height: 1280 },
   { src: photo4, width: 720, height: 1280 },
+  { src: photo5, width: 720, height: 1280 },
 ]
 
 function VideoCarousel() {
