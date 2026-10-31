@@ -833,8 +833,8 @@
 .results__stats {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 640px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  max-width: 720px;
   margin: var(--space-lg) auto 0;
   text-align: center;
 }
@@ -854,11 +854,11 @@
   font-size: 16px;
 }
 
-/* Тихая строка под цифрами: мелко, приглушённо, по центру */
-.results__note {
-  max-width: 640px;
-  margin: var(--space-md) auto 0;
-  text-align: center;
+/* Справа от цифры, через линию: мелко и приглушённо */
+.results__phrase {
+  align-self: center;
+  padding-left: var(--space-md);
+  text-align: left;
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-on-dark-muted);

@@ -12,10 +12,7 @@ import video4 from '../assets/reviews/ВидеоОтзыв4.mp4'
 import video5 from '../assets/reviews/ВидеоОтзыв5.mp4'
 
 // TODO: заменить на реальные цифры
-const STATS = [
-  { value: '50+', label: 'учеников' },
-  { value: '100+', label: 'часов практики' },
-]
+const STAT = { value: '50+', label: 'учеников' }
 
 // text — строка с кавычками «» или массив абзацев (тогда кавычки ставятся при выводе)
 const CASES = [
@@ -159,17 +156,15 @@ export default function Results() {
         <h2>Результаты учеников</h2>
 
         <ul className="results__stats">
-          {STATS.map((s) => (
-            <li key={s.label}>
-              <span className="results__value">{s.value}</span>
-              <span className="results__label">{s.label}</span>
-            </li>
-          ))}
+          <li>
+            <span className="results__value">{STAT.value}</span>
+            <span className="results__label">{STAT.label}</span>
+          </li>
+          <li className="results__phrase">
+            Ученики курса тренируются на Кипре у олимпийского всадника Antonis Petris, участвуют
+            в семинаре Lucie Klaassen во Франции и тренируют англоговорящих конников на Филиппинах.
+          </li>
         </ul>
-        <p className="results__note">
-          Ученики курса тренируются на Кипре у олимпийского всадника Antonis Petris, участвуют
-          в семинаре Lucie Klaassen во Франции и тренируют англоговорящих конников на Филиппинах.
-        </p>
 
         <div className="results__cases">
           {CASES.map((c, i) => (

@@ -35,7 +35,7 @@ export default function Services() {
           ))}
         </div>
         <div className="formats-row">
-          <h3>Форматы проведения</h3>
+          <h3>Занятия проходят онлайн:</h3>
           <ul>
             {FORMATS.map((f) => (
               <li key={f}>{f}</li>
