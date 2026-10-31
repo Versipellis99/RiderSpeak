@@ -164,6 +164,10 @@ export default function Results() {
             </li>
           ))}
         </ul>
+        <p className="results__note">
+          Ученики курса тренируются на Кипре у олимпийского всадника Antonis Petris, участвуют
+          в семинаре Lucie Klaassen во Франции и тренируют англоговорящих конников на Филиппинах.
+        </p>
 
         <div className="results__cases">
           {CASES.map((c, i) => (

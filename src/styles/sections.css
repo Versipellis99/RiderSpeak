@@ -854,6 +854,16 @@
   font-size: 16px;
 }
 
+/* Тихая строка под цифрами: мелко, приглушённо, по центру */
+.results__note {
+  max-width: 640px;
+  margin: var(--space-md) auto 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-on-dark-muted);
+}
+
 .results__cases {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1134,7 +1144,16 @@
   margin-top: var(--space-md);
 }
 
-.contacts__phone,
+/* Главная кнопка контактов: Telegram */
+.contacts__tg {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--space-md);
+  padding: 18px 40px;
+  font-size: 20px;
+}
+
 .contacts__email {
   display: inline-flex;
   align-items: center;
@@ -1142,13 +1161,6 @@
   font-weight: 400;
   text-decoration: none;
   transition: 0.2s ease-in-out;
-}
-
-.contacts__phone {
-  font-size: 28px;
-}
-
-.contacts__email {
   position: relative;
   padding: 0;
   font-family: inherit;
@@ -1181,7 +1193,6 @@
 }
 
 @media (hover: hover) {
-  .contacts__phone:hover,
   .contacts__email:hover {
     text-decoration: underline;
   }
@@ -1265,12 +1276,14 @@
     align-items: center;
   }
 
-  .contacts__phone {
-    font-size: 24px;
-  }
-
   .contacts__email {
     font-size: 18px;
+  }
+
+  .contacts__tg {
+    width: 100%;
+    justify-content: center;
+    padding-inline: 20px;
   }
 
   .contacts__socials {

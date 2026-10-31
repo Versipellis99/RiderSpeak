@@ -8,7 +8,7 @@ const stroke = {
   strokeLinejoin: 'round',
 }
 
-const PHONE = { label: '+7 915 198 2782', href: 'tel:+79151982782' }
+const TELEGRAM = 'https://t.me/DariaTTC'
 const EMAIL = 'dariaborisovattc@gmail.com'
 
 // Копирование в буфер. navigator.clipboard работает только по https и на localhost,
@@ -57,14 +57,8 @@ function EmailCopy() {
 
 const GROUP = { label: 'Блог о конном мире', href: 'https://t.me/daria_teatimeclub' }
 
+// Telegram вынесен в главную кнопку выше, поэтому в ряду иконок его нет
 const SOCIALS = [
-  {
-    name: 'Telegram',
-    title: 'Telegram',
-    href: 'https://t.me/DariaTTC',
-    external: true,
-    icon: <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />,
-  },
   {
     name: 'Instagram',
     title: 'Instagram',
@@ -98,10 +92,16 @@ export default function Contacts() {
     <section className="section" id="contacts">
       <div className="container contacts__inner">
         <h2>Контакты</h2>
-        <p className="contacts__lead">Свяжитесь удобным способом</p>
+        <p className="contacts__lead">Проще всего написать мне в Telegram</p>
+
+        <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />
+          </svg>
+          Написать в Telegram
+        </a>
 
         <div className="contacts__direct">
-          <a className="contacts__phone" href={PHONE.href}>{PHONE.label}</a>
           <EmailCopy />
         </div>
 
