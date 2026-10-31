@@ -12,20 +12,40 @@ const GROUPS = [
       { title: 'Подготовка к выезду', price: '10 000 ₽', note: '3 занятия с фокусом на конкретное событие' },
     ],
   },
+  // Группы без заголовка: название стоит в самой строке
   {
-    title: 'Разговорный клуб',
     items: [
-      { title: 'Разговорный клуб', price: '2 000 ₽', note: 'Разовое посещение' },
-      { title: 'Разговорный клуб', price: '8 000 ₽', note: 'Абонемент на месяц' },
+      {
+        title: 'Разговорный клуб',
+        options: [
+          { title: 'Разовое посещение', price: '2 000 ₽' },
+          { title: 'Абонемент на месяц', price: '8 000 ₽' },
+        ],
+      },
     ],
   },
-  // Группа без заголовка: одна строка
   {
     items: [{ title: 'Перевод и озвучка', price: 'По договорённости' }],
   },
 ]
 
 function PriceRow({ item, free = false }) {
+  // Одно название и несколько цен: название строкой, цены под ним
+  if (item.options) {
+    return (
+      <li className="price-item price-item--multi">
+        <p className="price-row__name price-item__head">{item.title}</p>
+        {item.options.map((o) => (
+          <div className="price-row price-row--option" key={o.title}>
+            <span className="price-row__name">{o.title}</span>
+            <span className="price-row__dots" aria-hidden="true" />
+            <span className="price-row__value">{o.price}</span>
+          </div>
+        ))}
+      </li>
+    )
+  }
+
   return (
     <li className="price-item">
       <div className={`price-row${free ? ' price-row--free' : ''}`}>

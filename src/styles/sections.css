@@ -1080,6 +1080,19 @@
   margin-top: 8px;
 }
 
+/* Одно название и несколько цен («Разговорный клуб»): цены под названием с отступом */
+.price-item__head {
+  padding-top: 12px;
+}
+
+.price-row--option {
+  padding: 6px 0 6px 16px;
+}
+
+.price-row--option .price-row__name {
+  color: var(--color-on-dark-muted);
+}
+
 .price-group {
   margin-top: 28px;
 }
