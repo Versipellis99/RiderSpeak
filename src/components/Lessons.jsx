@@ -7,10 +7,28 @@ const STEPS = [
   {
     title: 'Практика на реальных материалах',
     text:
-      'Учимся на том, что реально окружает конника: FEI-правила, семинар Беттины Бьолик ' +
-      '(Bettina Biolik) — лицензированного тренера по Академическому искусству верховой езды, ' +
-      'интервью с Ингрид Климке (Ingrid Klimke) — двукратной олимпийской чемпионкой.',
+      'Учимся на том, что реально окружает конника: правила FEI, семинары и интервью ' +
+      'с тренерами и чемпионами, видео и статьи о биомеханике, посадке и работе в руках, ' +
+      'гайды по подбору седла и устройству конюшни.',
+    materials: true,
   },
+]
+
+// title — тема или тип материала, source — источник (подпись приглушённым цветом)
+// TODO: уточнить у заказчика написание Amelia Necomb (возможно, Newcomb) и формат материала Diana Porsche
+const MATERIALS = [
+  { title: 'Биомеханика движений', source: 'статья Mel Fleming' },
+  { title: 'Интервью с Ингрид Климке (Ingrid Klimke)', source: 'двукратной олимпийской чемпионкой' },
+  {
+    title: 'Семинар Беттины Бьолик (Bettina Biolik)',
+    source: 'лицензированного тренера по Академическому искусству верховой езды',
+  },
+  { title: 'Инструкции по сбору лошади и базовая анатомия', source: 'видео This Esme' },
+  { title: 'Сбор лошади', source: 'видео Amelia Necomb' },
+  { title: 'Подготовка к работе в руках', source: 'статья Marijke de Jong' },
+  { title: 'Подбор седла', source: 'гайд Horse&Country' },
+  { title: 'Инфраструктура конюшни', source: 'Diana Porsche' },
+  { title: 'Вентиляция, освещение и оснащение конюшни', source: 'гайд British Horse Society' },
 ]
 
 const MODULES = [
@@ -21,7 +39,8 @@ const MODULES = [
   { label: 'Module V', title: 'Stable', text: 'Термины для ориентирования в конюшне' },
 ]
 
-function ModulesModal({ onClose }) {
+// Общая оболочка поп-апа: заголовок, крестик, Esc, блокировка прокрутки страницы
+function Modal({ title, titleId, onClose, children }) {
   const closeRef = useRef(null)
 
   useEffect(() => {
@@ -46,7 +65,7 @@ function ModulesModal({ onClose }) {
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modules-title">
+      <div className="modal" role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <button
           ref={closeRef}
           type="button"
@@ -64,24 +83,48 @@ function ModulesModal({ onClose }) {
             />
           </svg>
         </button>
-        <h3 id="modules-title">Примеры модулей</h3>
-        <div className="modules__grid">
-          {MODULES.map((m) => (
-            <article className="module-item" key={m.label}>
-              <p className="module-item__num">{m.label}</p>
-              <h4 className="module-item__title">{m.title}</h4>
-              <p className="module-item__descr">{m.text}</p>
-            </article>
-          ))}
-        </div>
+        <h3 id={titleId}>{title}</h3>
+        {children}
       </div>
     </div>,
     document.body,
   )
 }
 
+function ModulesModal({ onClose }) {
+  return (
+    <Modal title="Примеры модулей" titleId="modules-title" onClose={onClose}>
+      <div className="modules__grid">
+        {MODULES.map((m) => (
+          <article className="module-item" key={m.label}>
+            <p className="module-item__num">{m.label}</p>
+            <h4 className="module-item__title">{m.title}</h4>
+            <p className="module-item__descr">{m.text}</p>
+          </article>
+        ))}
+      </div>
+    </Modal>
+  )
+}
+
+function MaterialsModal({ onClose }) {
+  return (
+    <Modal title="Примеры материалов" titleId="materials-title" onClose={onClose}>
+      <ul className="materials__list">
+        {MATERIALS.map((m) => (
+          <li className="material" key={m.title}>
+            <p className="material__title">{m.title}</p>
+            <p className="material__source">{m.source}</p>
+          </li>
+        ))}
+      </ul>
+    </Modal>
+  )
+}
+
 export default function Lessons() {
   const [open, setOpen] = useState(false)
+  const [materialsOpen, setMaterialsOpen] = useState(false)
 
   return (
     <section className="section" id="lessons">
@@ -100,6 +143,15 @@ export default function Lessons() {
               <div>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
+                {s.materials && (
+                  <button
+                    type="button"
+                    className="lessons__link"
+                    onClick={() => setMaterialsOpen(true)}
+                  >
+                    Примеры материалов
+                  </button>
+                )}
               </div>
             </li>
           ))}
@@ -112,6 +164,7 @@ export default function Lessons() {
           Посмотреть примеры модулей
         </button>
         {open && <ModulesModal onClose={() => setOpen(false)} />}
+        {materialsOpen && <MaterialsModal onClose={() => setMaterialsOpen(false)} />}
       </div>
     </section>
   )
