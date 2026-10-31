@@ -35,6 +35,10 @@ const MATERIALS = [
   { title: 'Вентиляция, освещение и оснащение конюшни', source: 'гайд British Horse Society' },
 ]
 
+// В окне источник идёт заголовком (с большой буквы), тема под ним — с маленькой
+const upFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+const lowFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1)
+
 const MODULES = [
   { label: 'Module I', title: 'Tack', text: 'Термины по конной амуниции' },
   { label: 'Module II', title: 'Anatomy', text: 'Базовая анатомия лошади' },
@@ -117,8 +121,8 @@ function MaterialsModal({ onClose }) {
       <ul className="materials__list">
         {MATERIALS.map((m) => (
           <li className="material" key={m.title}>
-            <p className="material__title">{m.title}</p>
-            <p className="material__source">{m.source}</p>
+            <p className="material__title">{upFirst(m.source)}</p>
+            <p className="material__source">{lowFirst(m.title)}</p>
           </li>
         ))}
       </ul>
