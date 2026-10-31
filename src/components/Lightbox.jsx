@@ -12,12 +12,14 @@ const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
 // На компьютере: нажатие на фото переключает «вписать в экран» и «в натуральную величину»
 // (с прокруткой, чтобы прочитать мелкий текст). Esc и фон закрывают, стрелки листают.
 // На телефоне, как в соцсетях: фото на весь экран на чёрном фоне, соседние фото видны сбоку при свайпе,
-// щипок и двойное касание приближают, свайп вверх или вниз закрывает.
+// щипок и двойное касание приближают, свайп вверх или вниз закрывает. Фон всегда сплошной чёрный:
+// страницу под фото не видно ни при свайпе, ни при листании.
 export default function Lightbox({ photos, index, onClose, onChange }) {
   const [touch] = useState(() => window.matchMedia('(pointer: coarse)').matches)
   const [zoomed, setZoomed] = useState(false)
   const [view, setView] = useState({ s: 1, x: 0, y: 0 })
   const [animate, setAnimate] = useState(true)
+  const [closing, setClosing] = useState(false)
   const viewRef = useRef(view)
   const stageRef = useRef(null)
   const imgRef = useRef(null)
@@ -106,12 +108,13 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
         g.busy = false
       }, SLIDE_MS)
     }
-    // Свайп вверх или вниз: фото улетает и окно закрывается
+    // Свайп вверх или вниз: фото улетает, чёрный фон плавно гаснет и окно закрывается
     const flyAway = (dir) => {
       g.busy = true
       setAnimate(true)
+      setClosing(true)
       apply({ s: 1, x: 0, y: dir * window.innerHeight * 0.6 })
-      timer.current = setTimeout(() => live.current.onClose(), 160)
+      timer.current = setTimeout(() => live.current.onClose(), 200)
     }
 
     const onStart = (e) => {
@@ -251,7 +254,6 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
 
   if (touch) {
     // Лента из трёх фото: предыдущее, текущее, следующее. Лента едет за пальцем, пока фото не приближено
-    const fade = view.s === 1 ? Math.min(Math.abs(view.y) / 500, 0.6) : 0
     const stripX = view.s === 1 ? view.x : 0
     const slides = [index - 1, index, index + 1].filter((i) => i >= 0 && i < photos.length)
 
@@ -262,7 +264,7 @@ export default function Lightbox({ photos, index, onClose, onChange }) {
         role="dialog"
         aria-modal="true"
         aria-label="Фото переписки"
-        style={{ background: `rgba(0, 0, 0, ${1 - fade})` }}
+        style={{ background: '#000', opacity: closing ? 0 : 1, transition: 'opacity 0.2s ease-out' }}
       >
         <div className="lightbox__strip" style={{ transform: `translateX(${stripX}px)`, transition }}>
           {slides.map((i) => {
