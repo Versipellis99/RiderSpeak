@@ -986,7 +986,7 @@
   padding: 0;
   background: none;
   border: 0;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .results__zoom .ph {
@@ -1013,13 +1013,38 @@
   max-height: 100vh;
   max-height: 100dvh;
   object-fit: contain;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .lightbox__img.is-zoomed {
   max-width: none;
   max-height: none;
-  cursor: zoom-out;
+}
+
+/* Телефон: жесты (щипок, двойное касание, свайпы), фото двигается через transform */
+.lightbox--touch {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.lightbox--touch .lightbox__img {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.lightbox__counter {
+  position: fixed;
+  bottom: var(--space-md);
+  left: 50%;
+  padding: 4px 14px;
+  font-size: 14px;
+  color: var(--color-bg);
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: var(--radius-btn);
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .lightbox__btn {
