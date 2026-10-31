@@ -92,7 +92,7 @@ export default function Contacts() {
     <section className="section" id="contacts">
       <div className="container contacts__inner">
         <h2>Контакты</h2>
-        <p className="contacts__lead">Проще всего написать мне в Telegram</p>
+        <p className="contacts__lead">Напишите мне там, где вам удобнее: Telegram, ВКонтакте, Instagram или на почту</p>
 
         <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
           <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -100,10 +100,6 @@ export default function Contacts() {
           </svg>
           Написать в Telegram
         </a>
-
-        <div className="contacts__direct">
-          <EmailCopy />
-        </div>
 
         <ul className="contacts__socials">
           {SOCIALS.map((s) => (
@@ -122,6 +118,10 @@ export default function Contacts() {
             </li>
           ))}
         </ul>
+
+        <div className="contacts__direct">
+          <EmailCopy />
+        </div>
 
         <div className="contacts__group">
           <a className="btn btn-outline" href={GROUP.href} {...externalProps}>
