@@ -23,6 +23,9 @@ export default function Services() {
     <section className="section" id="services">
       <div className="container">
         <h2>Для кого</h2>
+        <p className="services__intro">
+          Если английский пока даётся с трудом, начнём с общей базы и затем перейдём к конному английскому.
+        </p>
         {/* Разметка и стили перенесены из LandingV2 */}
         <div className="audience">
           {SERVICES.map((s) => (

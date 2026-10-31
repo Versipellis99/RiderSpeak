@@ -1795,3 +1795,10 @@
     font-size: 16px;
   }
 }
+
+/* Вводная фраза в «Для кого»: тот же шрифт и цвет, что у описаний в карточках (.audience__what) */
+.services__intro {
+  max-width: 760px;
+  margin: var(--space-md) 0 var(--space-lg) 0;
+  color: var(--color-muted);
+}

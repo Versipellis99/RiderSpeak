@@ -1,7 +1,6 @@
 import glossaryPdf from '../assets/documents/Glossary.pdf'
 
 const TOPICS = [
-  '50 главных конных терминов',
   'Названия амуниции',
   'Движения лошади',
   'Элементы выездки',
@@ -14,7 +13,7 @@ export default function Dictionary() {
       <div className="container dictionary__inner">
         <div>
           <h2>Конный словарь</h2>
-          <p className="dictionary__lead">PDF-словарь с ключевыми терминами</p>
+          <p className="dictionary__lead">PDF-словарь: 50 главных терминов конного мира</p>
           <ul className="dictionary__list">
             {TOPICS.map((t) => (
               <li key={t}>{t}</li>
