@@ -6,7 +6,7 @@ import about3 from '../assets/media/about3.1.webp'
 // Порядок: горизонтальное фото сверху, под ним два вертикальных рядом
 const PHOTOS = [
   { src: about2, width: 1400, height: 933, alt: 'Дарья Борисова с лошадью на прогулке', cls: 'about__photo--wide' },
-  { src: about3, width: 1179, height: 1934, alt: 'Дарья Борисова за ноутбуком на занятии', cls: 'about__photo--laptop' },
+  { src: about3, width: 540, height: 960, alt: 'Дарья Борисова за ноутбуком на занятии', cls: 'about__photo--laptop' },
   { src: about1, width: 800, height: 1422, alt: 'Дарья Борисова подписывает учебник My Level', cls: 'about__photo--book' },
 ]
 

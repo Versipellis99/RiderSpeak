@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import footerPhoto from '../assets/media/footer-photo.webp'
 
 const stroke = {
   fill: 'none',
@@ -57,32 +58,10 @@ function EmailCopy() {
 
 const GROUP = { label: 'Блог о конном мире', href: 'https://t.me/daria_teatimeclub' }
 
-// Telegram вынесен в главную кнопку выше, поэтому в ряду иконок его нет
+// Telegram вынесен в главную кнопку, поэтому среди ссылок его нет
 const SOCIALS = [
-  {
-    name: 'Instagram',
-    title: 'Instagram',
-    href: 'https://instagram.com/daria_teatimeclub',
-    external: true,
-    icon: (
-      <>
-        <rect x="4" y="4" width="16" height="16" rx="5" {...stroke} />
-        <circle cx="12" cy="12" r="3.6" {...stroke} />
-        <circle cx="16.8" cy="7.2" r="0.6" fill="currentColor" />
-      </>
-    ),
-  },
-  {
-    name: 'ВКонтакте',
-    title: 'ВКонтакте',
-    href: 'https://vk.ru/club241698666',
-    external: true,
-    icon: (
-      <text x="12" y="16" textAnchor="middle" fontSize="11" fontWeight="600" fill="currentColor">
-        VK
-      </text>
-    ),
-  },
+  { name: 'Instagram', href: 'https://instagram.com/daria_teatimeclub' },
+  { name: 'ВКонтакте', href: 'https://vk.ru/club241698666' },
 ]
 
 const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
@@ -90,43 +69,44 @@ const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
 export default function Contacts() {
   return (
     <section className="section" id="contacts">
-      <div className="container contacts__inner">
-        <h2>Контакты</h2>
-        <p className="contacts__lead">Напишите мне там, где вам удобнее: Telegram, ВКонтакте, Instagram или на почту</p>
+      <div className="container">
+        <div className="contacts__panel">
+          <div className="contacts__text">
+            <h2>Напишите мне там, где вам удобнее</h2>
+            {/* TODO: подтвердить у владельца фразу «Отвечу и подскажу, с чего начать» */}
+            <p className="contacts__lead">Отвечу и подскажу, с чего начать.</p>
 
-        <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />
-          </svg>
-          Написать в Telegram
-        </a>
+            <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />
+              </svg>
+              Написать в Telegram
+            </a>
 
-        <ul className="contacts__socials">
-          {SOCIALS.map((s) => (
-            <li key={s.name}>
-              <a
-                className="contacts__icon"
-                href={s.href}
-                aria-label={s.name}
-                title={s.title}
-                {...(s.external ? externalProps : {})}
-              >
-                <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-                  {s.icon}
-                </svg>
-              </a>
-            </li>
-          ))}
-        </ul>
+            <div className="contacts__others">
+              {SOCIALS.map((s) => (
+                <a className="contacts__link" key={s.name} href={s.href} {...externalProps}>
+                  {s.name}
+                </a>
+              ))}
+              <EmailCopy />
+            </div>
 
-        <div className="contacts__direct">
-          <EmailCopy />
-        </div>
+            <a className="contacts__blog" href={GROUP.href} {...externalProps}>
+              Или почитайте блог о конном мире
+            </a>
+          </div>
 
-        <div className="contacts__group">
-          <a className="btn btn-outline" href={GROUP.href} {...externalProps}>
-            {GROUP.label}
-          </a>
+          <div className="contacts__photo">
+            <img
+              src={footerPhoto}
+              width={941}
+              height={1672}
+              loading="lazy"
+              decoding="async"
+              alt="Дарья Борисова на фоне конюшни"
+            />
+          </div>
         </div>
       </div>
     </section>
