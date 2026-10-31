@@ -72,23 +72,28 @@ export default function Contacts() {
       <div className="container">
         <div className="contacts__panel">
           <div className="contacts__text">
-            <h2>Напишите мне там, где вам удобнее</h2>
-            {/* TODO: подтвердить у владельца фразу «Отвечу и подскажу, с чего начать» */}
-            <p className="contacts__lead">Отвечу и подскажу, с чего начать.</p>
+            <div className="contacts__head">
+              <h2>Напишите мне там, где вам удобнее</h2>
+              {/* TODO: подтвердить у владельца фразу «Отвечу и подскажу, с чего начать» */}
+              <p className="contacts__lead">Отвечу и подскажу, с чего начать.</p>
+            </div>
 
-            <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
-              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-                <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />
-              </svg>
-              Написать в Telegram
-            </a>
+            <div className="contacts__actions">
+              <a className="btn btn-primary contacts__tg" href={TELEGRAM} {...externalProps}>
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                  <path d="M21 4 3 11l5.5 2L10 19l3-4 5 4z M8.5 13 21 4" {...stroke} />
+                </svg>
+                Написать в Telegram
+              </a>
 
-            <div className="contacts__others">
-              {SOCIALS.map((s) => (
-                <a className="contacts__link" key={s.name} href={s.href} {...externalProps}>
-                  {s.name}
-                </a>
-              ))}
+              <div className="contacts__socials">
+                {SOCIALS.map((s) => (
+                  <a className="btn contacts__social" key={s.name} href={s.href} {...externalProps}>
+                    {s.name}
+                  </a>
+                ))}
+              </div>
+
               <EmailCopy />
             </div>
 
