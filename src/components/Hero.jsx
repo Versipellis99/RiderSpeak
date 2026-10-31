@@ -77,7 +77,7 @@ export default function Hero() {
             и вывода ваших продуктов на международный рынок
           </p>
           <div className="hero__actions">
-            <a className="btn btn--light" href="#contacts">Записаться на бесплатный пробный урок</a>
+            <a className="btn btn--light" href="#contacts">Бесплатный пробный урок</a>
             <a className="btn btn--ghost-light" href="#pricing">Узнать стоимость</a>
           </div>
         </div>

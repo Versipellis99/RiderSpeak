@@ -1034,6 +1034,27 @@
   will-change: transform;
 }
 
+/* Лента фото: каждое занимает весь экран, соседние стоят сбоку */
+.lightbox__strip {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.lightbox__slide {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__slide .lightbox__img {
+  margin: 0;
+}
+
 .lightbox__counter {
   position: fixed;
   bottom: var(--space-md);
